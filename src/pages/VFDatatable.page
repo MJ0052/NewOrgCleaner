@@ -1,0 +1,148 @@
+<apex:page Controller="VFDatatableControllerHandler" showHeader="false" sidebar="false">
+	<head>
+		<!--<apex:includescript value="//code.jquery.com/jquery-1.11.1.min.js" / >-->
+            <apex:includescript value="{!URLFOR($Resource.jQuerySource)}" / >
+            <apex:includescript value="{!URLFOR($Resource.jqueryDatatableJS)}" / >
+		<!--<apex:includescript value="//cdn.datatables.net/1.10.4/js/jquery.dataTables.min.js" />-->
+		<apex:stylesheet value="{!URLFOR($Resource.bootstrap_sf1_beta16, 'bootstrap-sf1-0.1.0-beta.16/dist/css/bootstrap.css')}"/>
+        <apex:stylesheet value="//cdn.datatables.net/1.10.4/css/jquery.dataTables.css" />
+        <style>
+        body{
+            /* background-color:#78aa1c !important; */
+}
+.cardDashboard{
+    padding: 5% 0 0 0;
+}
+.card{
+    cursor:pointer;
+    border:none;
+    border-radius:0px;
+}
+.row{
+    margin:0;
+}
+.card:hover{
+	opacity:0.5;
+}
+
+.green{
+	background-color: #00ccff !important;
+}
+.yellow{
+	background-color: #EBB741 !important;
+}
+.cyan{
+	background-color: #04ACAD !important;
+}
+.orange{
+	background-color: #F2854C !important;
+}
+.green:hover {
+  
+}
+        </style>
+		<script>
+			j$ = jQuery.noConflict();
+			j$(document).ready( function () {
+				j$('#sampleTable').DataTable();
+                j$('div.chosensearch').chosentree({
+      width: 500,
+      deepLoad: true,
+      inputName: '',
+      input_placeholder: 'Search Groups',
+      input_type: 'search',
+      showtree: true,
+      load: function(node, callback) {
+        /**
+         * This would typically call jQuery.ajax to load a new node
+         * on your server where you would return the tree structure
+         * for the provided node.
+         */
+      }
+    });
+			});
+                
+		</script>
+	</head>
+	<body>
+        <div class="cardDashboard">
+<div class="row">
+    <div class="col-md-3">
+    </div>
+<div class="col-md-6">
+<div class="card context-feedback green">
+  <div class="card-heading">
+    Full Org Clean-Up
+  </div>
+  <ul class="card-detail ">
+    <li>Some Description</li>
+    <li>Something more..</li>
+  </ul>
+</div>
+</div>
+    <div class="col-md-3">
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-3">
+    </div>
+<div class="col-md-2">
+<div class="card context-event yellow">
+  <div class="card-heading">
+    Custom Data Clean-Up
+  </div>
+  <ul class="card-detail ">
+    <li>Some Description</li>
+    <li>Something more..</li>
+  </ul>
+</div>
+</div>
+<div class="col-md-2">
+<div class="card context-feed cyan">
+  <div class="card-heading">
+    Standard Data Clean-Up
+  </div>
+  <ul class="card-detail ">
+    <li>Some Description</li>
+    <li>Something more..</li>
+  </ul>
+</div>
+</div>
+<div class="col-md-2">
+<div class="card context-goals orange">
+  <div class="card-heading">
+    Configuration Clean-Up
+  </div>
+  <ul class="card-detail ">
+    <li>Some Description</li>
+    <li>Something more..</li>
+  </ul>
+</div>
+</div>
+    <div class="col-md-3">
+    </div>
+</div>
+</div>
+		<table id="sampleTable" class="display">
+			<thead>
+				<tr>
+					<th>Account</th>
+					<th>First Name</th>
+					<th>Last Name</th>
+					<th>Phone</th>
+				</tr>
+			</thead>
+			<tbody>
+				<apex:repeat value="{!contactList}" var="contact">
+					<tr>
+						<td>{!contact.Account.Name}</td>
+						<td>{!contact.FirstName}</td>
+						<td>{!contact.LastName}</td>
+						<td>{!contact.Phone}</td>
+					</tr>
+				</apex:repeat>
+			</tbody>
+		</table>
+        <div class="chosensearch"></div>
+	</body>
+</apex:page>
